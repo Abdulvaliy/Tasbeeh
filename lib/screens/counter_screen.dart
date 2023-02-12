@@ -17,7 +17,8 @@ class CounterScreen extends StatefulWidget {
   State<CounterScreen> createState() => _CounterScreenState();
 }
 
-class _CounterScreenState extends State<CounterScreen> with SingleTickerProviderStateMixin {
+class _CounterScreenState extends State<CounterScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation animation;
   bool? hasVibrate;
@@ -147,7 +148,9 @@ class _CounterScreenState extends State<CounterScreen> with SingleTickerProvider
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context, CupertinoPageRoute(builder: (context) => const TermsScreen()));
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => const TermsScreen()));
                       // launchUrl(
                       //   Uri.parse("https://policies.google.com/terms?hl=en-US"),
                       // mode: LaunchMode.externalApplication,
@@ -159,7 +162,8 @@ class _CounterScreenState extends State<CounterScreen> with SingleTickerProvider
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
-                        CupertinoPageRoute(builder: (context) => const SupportScreen()),
+                        CupertinoPageRoute(
+                            builder: (context) => const SupportScreen()),
                       );
                     },
                     child: Icon(Icons.support_agent, color: kMainColor),
@@ -169,7 +173,8 @@ class _CounterScreenState extends State<CounterScreen> with SingleTickerProvider
                     onTap: () {
                       Navigator.of(context)
                           .push(
-                        CupertinoPageRoute(builder: (context) => const SettingScreen()),
+                        CupertinoPageRoute(
+                            builder: (context) => const SettingScreen()),
                       )
                           .then((value) {
                         if (value == true) {
