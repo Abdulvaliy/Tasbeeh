@@ -18,13 +18,14 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late AnimationController _controller;
   late Animation animation;
   bool? hasVibrate;
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
     _controller = AnimationController(
       value: 1,
@@ -46,6 +47,25 @@ class _CounterScreenState extends State<CounterScreen>
   void dispose() {
     _controller.dispose();
     super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      print("resumed");
+    } else if (state == AppLifecycleState.inactive) {
+      final dataModelList = Provider.of<DataClass>(context, listen: false);
+      dataModelList.saveData();
+      print("inactive");
+    } else if (state == AppLifecycleState.detached) {
+      print("detached");
+    } else if (state == AppLifecycleState.paused) {
+      print("paused");
+    } else {
+      print("Nothing here so far");
+    }
   }
 
   void resetPressed() {
@@ -87,9 +107,10 @@ class _CounterScreenState extends State<CounterScreen>
           result: GestureDetector(
             onTapDown: (value) {
               dataModelList.updateCount();
+              var count = dataModelList.count();
+              print(count);
               final player = AudioPlayer();
-              if (dataModelList.count() % dataModelList.selectedLeap == 0 &&
-                  dataModelList.count() != 0) {
+              if (count % dataModelList.selectedLeap == 0 && count != 0) {
                 player.play(
                   AssetSource("stone.mp3"),
                   volume: dataModelList.volume,
@@ -156,9 +177,9 @@ class _CounterScreenState extends State<CounterScreen>
                       // mode: LaunchMode.externalApplication,
                       // );
                     },
-                    child: Icon(Icons.info, color: kMainColor),
+                    child: Icon(Icons.info, color: kMainColor, size: 28),
                   ),
-                  const SizedBox(width: 25),
+                  const SizedBox(width: 20),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -166,9 +187,10 @@ class _CounterScreenState extends State<CounterScreen>
                             builder: (context) => const SupportScreen()),
                       );
                     },
-                    child: Icon(Icons.support_agent, color: kMainColor),
+                    child:
+                        Icon(Icons.support_agent, color: kMainColor, size: 28),
                   ),
-                  const SizedBox(width: 25),
+                  const SizedBox(width: 20),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context)
@@ -182,7 +204,7 @@ class _CounterScreenState extends State<CounterScreen>
                         }
                       });
                     },
-                    child: Icon(Icons.settings, color: kMainColor),
+                    child: Icon(Icons.settings, color: kMainColor, size: 28),
                   ),
                   const SizedBox(width: 18),
                 ],

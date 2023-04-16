@@ -35,8 +35,15 @@ class DataClass extends ChangeNotifier {
     return _count;
   }
 
-  Future<void> updateCount() async {
+  Future<void> saveData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt("count", _count);
+    prefs.setInt("leap", leap);
+    prefs.setDouble("circleProgress", circleProgress);
+  }
+
+  Future<void> updateCount() async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
     _count++;
     leap = _count ~/ selectedLeap;
     if (circleProgress <= 1) {
@@ -49,9 +56,9 @@ class DataClass extends ChangeNotifier {
       circleProgress = 0.0;
     }
 
-    prefs.setInt("count", _count);
-    prefs.setInt("leap", leap);
-    prefs.setDouble("circleProgress", circleProgress);
+    // prefs.setInt("count", _count);
+    // prefs.setInt("leap", leap);
+    // prefs.setDouble("circleProgress", circleProgress);
 
     notifyListeners();
   }

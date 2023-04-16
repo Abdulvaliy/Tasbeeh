@@ -46,6 +46,7 @@ class _SupportScreenState extends State<SupportScreen> {
           child: Icon(
             Icons.arrow_back_ios,
             color: kMainColor,
+            size: 28,
           ),
         ),
         title: Text(
@@ -182,7 +183,8 @@ class _SupportScreenState extends State<SupportScreen> {
                               SizedBox(
                                 width: 250,
                                 child: Text(
-                                  languages['address_location']![selectedLanguage],
+                                  languages['address_location']![
+                                      selectedLanguage],
                                   style: TextStyle(
                                     fontSize: 18,
                                     color: kMainColor,
@@ -225,11 +227,13 @@ class _SupportScreenState extends State<SupportScreen> {
               ),
               const SizedBox(height: 10.0),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
                 child: TextField(
                   controller: nameController,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(CupertinoIcons.person_alt, color: Colors.grey),
+                    prefixIcon: const Icon(CupertinoIcons.person_alt,
+                        color: Colors.grey),
                     labelText: languages['name']![selectedLanguage],
                     border: myInputBorder(),
                     // enabledBorder: myInputBorder(),
@@ -238,7 +242,8 @@ class _SupportScreenState extends State<SupportScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
                 child: TextField(
                   controller: mailController,
                   keyboardType: TextInputType.none,
@@ -247,7 +252,8 @@ class _SupportScreenState extends State<SupportScreen> {
                   readOnly: true,
                   enabled: false,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(CupertinoIcons.mail_solid, color: Colors.grey),
+                    prefixIcon: const Icon(CupertinoIcons.mail_solid,
+                        color: Colors.grey),
                     // labelText: "Name",
                     border: myInputBorder(),
                     // enabledBorder: myInputBorder(),
@@ -256,13 +262,15 @@ class _SupportScreenState extends State<SupportScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
                 child: TextField(
                   controller: messageController,
                   keyboardType: TextInputType.multiline,
                   maxLines: 3,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(CupertinoIcons.text_bubble_fill, color: Colors.grey),
+                    prefixIcon: const Icon(CupertinoIcons.text_bubble_fill,
+                        color: Colors.grey),
                     labelText: languages['message']![selectedLanguage],
                     border: myInputBorder(),
                     // enabledBorder: myInputBorder(),
@@ -271,7 +279,8 @@ class _SupportScreenState extends State<SupportScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -285,7 +294,8 @@ class _SupportScreenState extends State<SupportScreen> {
                       String email = mailController.text;
                       String subject = nameController.text;
                       String body = messageController.text;
-                      Uri mail = Uri.parse("mailto:$email?subject=$subject&body=$body");
+                      Uri mail = Uri.parse(
+                          "mailto:$email?subject=$subject&body=$body");
                       if (await launchUrl(mail)) {
                         if (kDebugMode) {
                           print("email app opened");

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' as foundation;
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasbeeh/data/constants.dart';
 import 'package:tasbeeh/data/english_terms.dart';
@@ -85,6 +85,7 @@ class _TermsScreenState extends State<TermsScreen> {
             child: Icon(
               Icons.arrow_back_ios,
               color: kMainColor,
+              size: 28,
             ),
           ),
           title: Text(

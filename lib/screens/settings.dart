@@ -33,7 +33,10 @@ class _SettingScreenState extends State<SettingScreen> {
     _vibrationValue = dataModelList.vibrate;
     _onLeftValue = dataModelList.onLeft;
     _languageValue = dataModelList.language;
-    if (_leapValue != 11 && _leapValue != 33 && _leapValue != 99 && _leapValue != 100) {
+    if (_leapValue != 11 &&
+        _leapValue != 33 &&
+        _leapValue != 99 &&
+        _leapValue != 100) {
       customValue = _leapValue;
       customController.text = _leapValue.toString();
     }
@@ -56,6 +59,7 @@ class _SettingScreenState extends State<SettingScreen> {
             child: Icon(
               Icons.arrow_back_ios,
               color: kMainColor,
+              size: 28,
             )),
         title: Text(
           languages['settings']![selectedLanguage],
@@ -78,12 +82,13 @@ class _SettingScreenState extends State<SettingScreen> {
               dataModelList.updateLanguage(_languageValue);
               Navigator.of(context).pop(true);
             },
-            style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.transparent)),
+            style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent)),
             child: Text(
               languages['save']![selectedLanguage],
               style: TextStyle(
                 color: kMainColor,
-                fontSize: 16,
+                fontSize: 18,
               ),
             ),
           )
@@ -190,7 +195,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                       controller: customController,
                                       keyboardType: TextInputType.number,
                                       decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10)),
                                         border: Border.all(color: kMainColor),
                                       ),
                                     )
