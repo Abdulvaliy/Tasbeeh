@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +5,7 @@ import 'package:tasbeeh/data/constants.dart';
 import 'package:tasbeeh/data/data_class.dart';
 import 'package:tasbeeh/screens/background.dart';
 import 'package:tasbeeh/screens/settings.dart';
+import 'package:tasbeeh/screens/share_screen.dart';
 import 'package:tasbeeh/screens/support.dart';
 import 'package:tasbeeh/screens/terms_conditions.dart';
 import 'package:vibration/vibration.dart';
@@ -17,8 +17,7 @@ class CounterScreen extends StatefulWidget {
   State<CounterScreen> createState() => _CounterScreenState();
 }
 
-class _CounterScreenState extends State<CounterScreen>
-    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+class _CounterScreenState extends State<CounterScreen> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late AnimationController _controller;
   late Animation animation;
   bool? hasVibrate;
@@ -80,6 +79,8 @@ class _CounterScreenState extends State<CounterScreen>
   @override
   Widget build(BuildContext context) {
     final dataModelList = Provider.of<DataClass>(context);
+    // final player = AudioPlayer();
+    // Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7F9F8),
@@ -105,16 +106,16 @@ class _CounterScreenState extends State<CounterScreen>
             ),
           ),
           result: GestureDetector(
-            onTapDown: (value) {
+            onTapDown: (value) async {
               dataModelList.updateCount();
               var count = dataModelList.count();
               print(count);
-              final player = AudioPlayer();
+
               if (count % dataModelList.selectedLeap == 0 && count != 0) {
-                player.play(
-                  AssetSource("stone.mp3"),
-                  volume: dataModelList.volume,
-                );
+                // await player.play(
+                //   AssetSource("stone.mp3"),
+                //   volume: dataModelList.volume,
+                // );
                 if (dataModelList.vibrate && hasVibrate!) {
                   Vibration.vibrate(
                     duration: 350,
@@ -122,10 +123,10 @@ class _CounterScreenState extends State<CounterScreen>
                   );
                 }
               } else {
-                player.play(
-                  AssetSource("glass.mp3"),
-                  volume: dataModelList.volume,
-                );
+                // await player.play(
+                //   AssetSource("glass.mp3"),
+                //   volume: dataModelList.volume,
+                // );
                 if (dataModelList.vibrate && hasVibrate!) {
                   Vibration.vibrate(
                     duration: 80,
@@ -168,10 +169,14 @@ class _CounterScreenState extends State<CounterScreen>
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) => const TermsScreen()));
+                      Navigator.push(context, CupertinoPageRoute(builder: (context) => const ShareScreen()));
+                    },
+                    child: Icon(Icons.adaptive.share, color: kMainColor, size: 28),
+                  ),
+                  const SizedBox(width: 20),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, CupertinoPageRoute(builder: (context) => const TermsScreen()));
                       // launchUrl(
                       //   Uri.parse("https://policies.google.com/terms?hl=en-US"),
                       // mode: LaunchMode.externalApplication,
@@ -183,20 +188,17 @@ class _CounterScreenState extends State<CounterScreen>
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
-                        CupertinoPageRoute(
-                            builder: (context) => const SupportScreen()),
+                        CupertinoPageRoute(builder: (context) => const SupportScreen()),
                       );
                     },
-                    child:
-                        Icon(Icons.support_agent, color: kMainColor, size: 28),
+                    child: Icon(Icons.support_agent, color: kMainColor, size: 28),
                   ),
                   const SizedBox(width: 20),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context)
                           .push(
-                        CupertinoPageRoute(
-                            builder: (context) => const SettingScreen()),
+                        CupertinoPageRoute(builder: (context) => const SettingScreen()),
                       )
                           .then((value) {
                         if (value == true) {

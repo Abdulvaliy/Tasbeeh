@@ -182,4 +182,22 @@ Map<String, Map> languages = {
     "ru": "УСЛОВИЯ И ПОЛОЖЕНИЯ",
     "tr": "HÜKÜMLER VE KOŞULLAR",
   },
+  "share": {
+    "en": "Share",
+    "uz": "Ulashish",
+    "ru": "Поделиться",
+    "tr": "Paylaşmak",
+  },
+  "soon": {
+    "en": "Soon",
+    "uz": "Tez kunda",
+    "ru": "Скоро",
+    "tr": "Yakında",
+  },
+  "scan_description": {
+    "en": "Scan QR to download Tasbeh application",
+    "uz": "Tasbeh ilovasini yuklab olish uchun QR-ni skanerlang",
+    "ru": "Отсканируйте QR, чтобы загрузить приложение Tasbeh",
+    "tr": "Tasbeh uygulamasını indirmek için QR tarayın",
+  },
 };

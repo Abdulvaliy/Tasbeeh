@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
@@ -33,10 +35,7 @@ class _SettingScreenState extends State<SettingScreen> {
     _vibrationValue = dataModelList.vibrate;
     _onLeftValue = dataModelList.onLeft;
     _languageValue = dataModelList.language;
-    if (_leapValue != 11 &&
-        _leapValue != 33 &&
-        _leapValue != 99 &&
-        _leapValue != 100) {
+    if (_leapValue != 11 && _leapValue != 33 && _leapValue != 99 && _leapValue != 100) {
       customValue = _leapValue;
       customController.text = _leapValue.toString();
     }
@@ -82,8 +81,7 @@ class _SettingScreenState extends State<SettingScreen> {
               dataModelList.updateLanguage(_languageValue);
               Navigator.of(context).pop(true);
             },
-            style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.transparent)),
+            style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.transparent)),
             child: Text(
               languages['save']![selectedLanguage],
               style: TextStyle(
@@ -195,8 +193,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       controller: customController,
                                       keyboardType: TextInputType.number,
                                       decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10)),
+                                        borderRadius: const BorderRadius.all(Radius.circular(10)),
                                         border: Border.all(color: kMainColor),
                                       ),
                                     )
@@ -210,55 +207,91 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ),
               const SizedBox(height: 5),
-              Card(
-                elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          languages['sound']![selectedLanguage],
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      Row(
+              Stack(
+                children: [
+                  Card(
+                    elevation: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(CupertinoIcons.volume_mute, color: kMainColor),
-                          Expanded(
-                            child: SizedBox(
-                              // width: size.width - 10,
-                              child: CupertinoSlider(
-                                activeColor: kMainColor,
-                                min: 0,
-                                max: 10,
-                                divisions: 10,
-                                value: _volumeValue,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _volumeValue = value;
-                                  });
-                                },
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              languages['sound']![selectedLanguage],
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                          const SizedBox(width: 5),
-                          Icon(
-                            CupertinoIcons.volume_up,
-                            color: kMainColor,
-                            size: 28,
+                          Row(
+                            children: [
+                              Icon(CupertinoIcons.volume_mute, color: kMainColor),
+                              Expanded(
+                                child: SizedBox(
+                                  // width: size.width - 10,
+                                  child: CupertinoSlider(
+                                    activeColor: kMainColor,
+                                    min: 0,
+                                    max: 10,
+                                    divisions: 10,
+                                    value: _volumeValue,
+                                    onChanged: (value) {
+                                      // setState(() {
+                                      //   _volumeValue = value;
+                                      // });
+                                    },
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 5),
+                              Icon(
+                                CupertinoIcons.volume_up,
+                                color: kMainColor,
+                                size: 28,
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  Positioned(
+                    top: 200,
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                      child: Container(
+                        color: Colors.black.withOpacity(0),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 25),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: kMainColor,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          languages['soon']![selectedLanguage],
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
+
               const SizedBox(height: 5),
               Card(
                 elevation: 2,
@@ -391,9 +424,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           });
                         },
                         child: Text(
-                          _onLeftValue
-                              ? languages['left']![selectedLanguage]
-                              : languages['right']![selectedLanguage],
+                          _onLeftValue ? languages['left']![selectedLanguage] : languages['right']![selectedLanguage],
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
