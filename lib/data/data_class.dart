@@ -9,8 +9,10 @@ class DataClass extends ChangeNotifier {
     required double? volumeParameter,
     required bool? onLeftParameter,
     required bool? vibrateParameter,
+    required bool? cycleVibrateParameter,
     required String? languageParameter,
     required double? circleProgressParameter,
+    required bool? darkModeParameter,
   }) {
     _count = countParameter!;
     leap = leapParameter!;
@@ -18,8 +20,10 @@ class DataClass extends ChangeNotifier {
     volume = volumeParameter!;
     onLeft = onLeftParameter!;
     vibrate = vibrateParameter!;
+    cycleVibrate = cycleVibrateParameter!;
     language = languageParameter!;
     circleProgress = circleProgressParameter!;
+    darkMode = darkModeParameter!;
   }
 
   late int _count;
@@ -28,8 +32,10 @@ class DataClass extends ChangeNotifier {
   late double volume;
   late bool onLeft;
   late bool vibrate;
+  late bool cycleVibrate;
   late String? language;
   late double circleProgress;
+  late bool darkMode;
 
   count() {
     return _count;
@@ -106,10 +112,12 @@ class DataClass extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateVibrate(bool value) async {
+  Future<void> updateVibrate(bool value, bool cycleValue) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     vibrate = value;
+    cycleVibrate = cycleValue;
     prefs.setBool("vibration", vibrate);
+    prefs.setBool("cycleVibration", cycleVibrate);
     notifyListeners();
   }
 
@@ -117,6 +125,13 @@ class DataClass extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     language = value;
     prefs.setString("language", language!);
+    notifyListeners();
+  }
+
+  Future<void> updateDarkMode(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    darkMode = value;
+    prefs.setBool("darkMode", darkMode);
     notifyListeners();
   }
 }

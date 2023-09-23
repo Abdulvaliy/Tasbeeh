@@ -38,6 +38,7 @@ class Background extends StatelessWidget {
               "images/background-image.svg",
               height: size.height,
               clipBehavior: Clip.hardEdge,
+              color: dataModelList.darkMode ? const Color(0xFF404040) : null,
             ),
           ),
           Positioned(

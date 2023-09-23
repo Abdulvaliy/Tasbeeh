@@ -54,6 +54,12 @@ Map<String, Map> languages = {
     "ru": "Вибрация",
     "tr": "Titreşim",
   },
+  "vibration_cycle": {
+    "en": "Cycle vibration",
+    "uz": "Sikl tebranish",
+    "ru": "Цикл вибрации",
+    "tr": "Döngü titreşimi",
+  },
   "language": {
     "en": "Language",
     "uz": "Til",
@@ -199,5 +205,11 @@ Map<String, Map> languages = {
     "uz": "Tasbeh ilovasini yuklab olish uchun QR-ni skanerlang",
     "ru": "Отсканируйте QR, чтобы загрузить приложение Tasbeh",
     "tr": "Tasbeh uygulamasını indirmek için QR tarayın",
+  },
+  "dark_mode": {
+    "en": "Dark mode",
+    "uz": "Qorong'i rejim",
+    "ru": "Тёмный режим",
+    "tr": "Karanlık mod",
   },
 };

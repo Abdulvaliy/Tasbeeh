@@ -26,25 +26,32 @@ void main() async {
   if (prefs.getBool("vibration") == null) {
     prefs.setBool("vibration", true);
   }
+  if (prefs.getBool("cycleVibration") == null) {
+    prefs.setBool("cycleVibration", true);
+  }
   if (prefs.getString("language") == null) {
     prefs.setString("language", "en");
   }
   if (prefs.getDouble("circleProgress") == null) {
     prefs.setDouble("circleProgress", 0);
   }
+  if (prefs.getBool('darkMode') == null) {
+    prefs.setBool('darkMode', false);
+  }
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (context) => DataClass(
-        countParameter: prefs.getInt("count"),
-        leapParameter: prefs.getInt("leap"),
-        selectedLeapParameter: prefs.getInt("selectedLeap"),
-        volumeParameter: prefs.getDouble("volume"),
-        onLeftParameter: prefs.getBool("onLeft"),
-        vibrateParameter: prefs.getBool("vibration"),
-        languageParameter: prefs.getString("language"),
-        circleProgressParameter: prefs.getDouble("circleProgress"),
-      ),
+          countParameter: prefs.getInt("count"),
+          leapParameter: prefs.getInt("leap"),
+          selectedLeapParameter: prefs.getInt("selectedLeap"),
+          volumeParameter: prefs.getDouble("volume"),
+          onLeftParameter: prefs.getBool("onLeft"),
+          vibrateParameter: prefs.getBool("vibration"),
+          cycleVibrateParameter: prefs.getBool('cycleVibration'),
+          languageParameter: prefs.getString("language"),
+          circleProgressParameter: prefs.getDouble("circleProgress"),
+          darkModeParameter: prefs.getBool('darkMode')),
     ),
   ], child: const Tasbeh()));
 }

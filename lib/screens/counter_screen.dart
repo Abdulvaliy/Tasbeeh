@@ -83,7 +83,7 @@ class _CounterScreenState extends State<CounterScreen> with SingleTickerProvider
     // Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F9F8),
+      backgroundColor: dataModelList.darkMode ? const Color(0xFF333333) : const Color(0xFFF7F9F8),
       extendBodyBehindAppBar: true,
       body: SafeArea(
         child: Background(
@@ -116,7 +116,8 @@ class _CounterScreenState extends State<CounterScreen> with SingleTickerProvider
                 //   AssetSource("stone.mp3"),
                 //   volume: dataModelList.volume,
                 // );
-                if (dataModelList.vibrate && hasVibrate!) {
+                /// this function works if vibration supports and cycle vibrate is turned on
+                if (dataModelList.cycleVibrate && hasVibrate!) {
                   Vibration.vibrate(
                     duration: 350,
                     amplitude: 1,

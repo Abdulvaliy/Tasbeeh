@@ -22,8 +22,10 @@ class _SettingScreenState extends State<SettingScreen> {
   int? customValue = 150;
   late double _volumeValue;
   late bool _vibrationValue;
+  late bool _cycleVibrationValue;
   late bool _onLeftValue;
   String? _languageValue = "en";
+  late bool _darkMode;
   TextEditingController customController = TextEditingController();
 
   @override
@@ -33,7 +35,9 @@ class _SettingScreenState extends State<SettingScreen> {
     _leapValue = dataModelList.selectedLeap;
     _volumeValue = dataModelList.volume * 10;
     _vibrationValue = dataModelList.vibrate;
+    _cycleVibrationValue = dataModelList.cycleVibrate;
     _onLeftValue = dataModelList.onLeft;
+    _darkMode = dataModelList.darkMode;
     _languageValue = dataModelList.language;
     if (_leapValue != 11 && _leapValue != 33 && _leapValue != 99 && _leapValue != 100) {
       customValue = _leapValue;
@@ -77,8 +81,9 @@ class _SettingScreenState extends State<SettingScreen> {
               }
               dataModelList.updateResetSide(_onLeftValue);
               dataModelList.updateVolume(_volumeValue);
-              dataModelList.updateVibrate(_vibrationValue);
+              dataModelList.updateVibrate(_vibrationValue, _cycleVibrationValue);
               dataModelList.updateLanguage(_languageValue);
+              dataModelList.updateDarkMode(_darkMode);
               Navigator.of(context).pop(true);
             },
             style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.transparent)),
@@ -319,7 +324,52 @@ class _SettingScreenState extends State<SettingScreen> {
                           },
                         ),
                       ),
+                      ListTile(
+                        leading: Icon(Icons.access_time, color: kMainColor),
+                        title: Text(
+                          languages['vibration_cycle']![selectedLanguage],
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        trailing: CupertinoSwitch(
+                          activeColor: kMainColor,
+                          value: _cycleVibrationValue,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _cycleVibrationValue = value;
+                            });
+                          },
+                        ),
+                      ),
                     ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 5),
+              Card(
+                elevation: 2,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: ListTile(
+                    leading: Icon(Icons.dark_mode_outlined, color: kMainColor),
+                    title: Text(
+                      languages['dark_mode']![selectedLanguage],
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    trailing: CupertinoSwitch(
+                      activeColor: kMainColor,
+                      value: _darkMode,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _darkMode = value;
+                        });
+                      },
+                    ),
                   ),
                 ),
               ),
